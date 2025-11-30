@@ -20,6 +20,7 @@ for i in {0..23};    do arr[$i]="03"; done # 3hr fcst
 for i in {0..23..6}; do arr[$i]="24"; done # 24hr fcst every 6hrs
 export FCST_LEN_HRS_CYCLES="${arr[*]}"
 export HISTORY_INTERVAL=1
+export MPASOUT_INTERVAL=none
 export MPASSIT_GROUP_TOTAL_NUM=2
 export UPP_GROUP_TOTAL_NUM=2
 
@@ -60,3 +61,4 @@ export IC_EXTRN_MDL_BASEDIR="/scratch4/BMC/rtrr/RRFS2_RETRO_DATA/Nov2025/RRFS"
 export LBC_EXTRN_MDL_BASEDIR=${IC_EXTRN_MDL_BASEDIR}
 #
 export DO_CLEAN=false
+export RETRO_CYCLETHROTTLE=1

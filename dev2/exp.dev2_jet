@@ -21,6 +21,7 @@ for i in {0..23};    do arr[$i]="03"; done # 3hr fcst
 for i in {0..23..6}; do arr[$i]="24"; done # 24hr fcst every 6hrs
 export FCST_LEN_HRS_CYCLES="${arr[*]}"
 export HISTORY_INTERVAL=1
+#export MPASOUT_INTERVAL=none
 export MPASSIT_GROUP_TOTAL_NUM=2
 export UPP_GROUP_TOTAL_NUM=2
 
@@ -28,8 +29,8 @@ export IC_OFFSET=0
 export LBC_OFFSET=0
 export LBC_LENGTH=24
 export LBC_INTERVAL=1
-export LBC_UNGRIB_GROUP_TOTAL_NUM=4
-export LBC_GROUP_TOTAL_NUM=4
+export LBC_UNGRIB_GROUP_TOTAL_NUM=8
+export LBC_GROUP_TOTAL_NUM=8
 
 export RETRO_PERIOD="2025112300-2025112300"
 export LBC_CYCS="00 06 12 18"  # evenly divide 24 hours, e.g., "00 12", "00 06 12 18", etc
@@ -77,3 +78,4 @@ export CHEM_INPUT="/lfs6/BMC/rtwbl/cheMPAS-Fire/input"
 export RAVE_INPUT="/public/data/grids/nesdis/3km_fire_emissions"
 export REGRID_WRAPPER_DIR="/lfs5/BMC/rtwbl/rap-chem/mpas_rt/working/ben_interp/regrid-wrapper/"
 export REGRID_CONDA_ENV="/lfs5/BMC/rtwbl/rap-chem/miniconda/envs/regrid-wrapper"
+export RETRO_CYCLETHROTTLE=1

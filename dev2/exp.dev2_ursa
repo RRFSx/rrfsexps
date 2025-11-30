@@ -21,6 +21,7 @@ for i in {0..23};    do arr[$i]="03"; done # 3hr fcst
 for i in {0..23..6}; do arr[$i]="24"; done # 24hr fcst every 6hrs
 export FCST_LEN_HRS_CYCLES="${arr[*]}"
 export HISTORY_INTERVAL=1
+#export MPASOUT_INTERVAL=none
 export MPASSIT_GROUP_TOTAL_NUM=2
 export UPP_GROUP_TOTAL_NUM=2
 
@@ -76,3 +77,4 @@ export CHEM_INPUT="/scratch4/BMC/acomp/cheMPAS-Fire/input"
 export RAVE_INPUT="/scratch4/BMC/rtrr/RRFS2_RETRO_DATA/Nov2025/RRFS/3km_fire_emissions"
 export REGRID_WRAPPER_DIR="/scratch4/BMC/acomp/Sudheer/Fire-nest/RRFS-SD/Tools/regrid-wrapper"
 export REGRID_CONDA_ENV="/scratch4/BMC/acomp/Sudheer/anaconda3Ursa/envs/regrid-wrapper"
+export RETRO_CYCLETHROTTLE=1
