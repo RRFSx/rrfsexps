@@ -1,0 +1,48 @@
+#!/bin/bash
+source /etc/profile
+module load rocoto
+cd /scratch5/purged/gge/arps/PEAR/exp/rrfsdet
+recipents="Guoqing.Ge@noaa.gov Guoqing.Ge@noaa.gov"
+subject="rrfsv2x alert"
+
+curtime=$(date -u +%Y%m%d%H)
+PDY=${curtime:0:8}
+cyc=${curtime:8:2}
+
+prevCyc=$(date -u -d "${PDY} ${cyc} UTC -3 hours" +%Y%m%d%H) # check the recent 3 cycles
+cycles=${prevCyc}00:${PDY}${cyc}00
+
+send_email=false
+msg=$(rocotostat -w rrfs.xml -d rrfs.db -c ${cycles})
+echo "${msg}" > .msg.new
+
+# need to send out alerts when we get DEAD jobs
+if [[ -s .msg.save  && -s .msg.new ]]; then
+  # only send alerts if the new msg is different from the saved one to avoid duplicate alerts
+  if ! diff .msg.save .msg.new &>/dev/null && [[ ${msg} == *DEAD* ]]; then
+    send_email=true
+  fi
+elif [[ ${msg} == *DEAD* ]]; then
+  send_email=true
+fi
+mv .msg.new .msg.save
+
+## check whether if the workflow is stalled, i.e. no running jobs
+## and if stalled for more than an hour, send out alerts
+if [[ ${msg} != *RUNNING* ]]; then
+  if [[ -s .stall ]]; then
+    stall_bgn=$(head -n 1 .stall)
+    cur_seconds=$(date +%s)
+    diff_secons=$(( cur_seconds - stall_bgn ))
+    if (( diff_secons > 3600 )); then # stalled for an hour
+      send_email=true
+      rm -rf .stall
+    fi
+  else
+    date +%s > .stall
+  fi
+fi
+
+if ${send_email}; then
+  echo "${msg}" | mail -s "${subject}" ${recipents}
+fi
