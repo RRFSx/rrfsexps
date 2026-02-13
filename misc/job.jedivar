@@ -1,0 +1,28 @@
+#!/bin/sh
+#SBATCH -o job.log
+#SBATCH --job-name=jedivar
+#SBATCH --account=bil-fire10-oar
+#SBATCH --qos=normal
+#SBATCH --partition=batch
+###SBATCH --partition=hera
+###SBATCH --partition=kjet
+###SBATCH --reservation=rrfsens
+#SBATCH --cluster=c6
+#SBATCH -t 2:00:00
+#SBATCH --nodes=80
+#SBATCH --tasks-per-node=10
+
+HOMErrfs=/gpfs/f6/bil-fire10-oar/world-shared/gge/rrfs2/jedivar_crash/rrfs-workflow.20250711
+module purge
+source ${HOMErrfs}/workflow/ush/detect_machine.sh
+echo "run on ${MACHINE}"
+
+## jedivar, getkf
+module use ${HOMErrfs}/sorc/RDASApp/modulefiles
+module load RDAS/${MACHINE}.intel
+export LD_LIBRARY_PATH=${HOMErrfs}/sorc/RDASApp/build/lib64:${LD_LIBRARY_PATH}
+
+ulimit -s unlimited
+ulimit -v unlimited
+ulimit -a
+srun ./mpasjedi_variational.x jedivar.yaml log.out
