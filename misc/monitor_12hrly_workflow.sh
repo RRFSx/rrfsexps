@@ -1,7 +1,7 @@
 #!/bin/bash
 source /etc/profile
 module load rocoto
-cd /scratch5/purged/gge/arps/PEAR/exp/rrfsdet
+cd /scratch4/BMC/zrtrr/gge/ARPS/PEAR/exp/rrfsdet
 recipents="Guoqing.Ge@noaa.gov Guoqing.Ge@noaa.gov"
 subject="rt_PEAR alert"
 
