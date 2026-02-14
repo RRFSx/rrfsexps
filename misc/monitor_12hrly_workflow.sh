@@ -32,13 +32,15 @@ if [[ ${msg} != *RUNNING* ]]; then
     stall_bgn=$(head -n 1 .stall)
     cur_seconds=$(date +%s)
     diff_secons=$(( cur_seconds - stall_bgn ))
-    if (( diff_secons > 3600 )); then # stalled for an hour
+    if (( diff_secons > 10800 )); then # stalled for 3 hours
       send_email=true
       rm -rf .stall
     fi
   else
     date +%s > .stall
   fi
+else
+  rm -rf .stall
 fi
 
 if ${send_email}; then
