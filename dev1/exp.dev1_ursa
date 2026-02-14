@@ -54,7 +54,7 @@ export KEEPDATA=NO
 #
 # set up IC, LBC sources
 export IC_EXTRN_MDL_NAME="RRFS"
-export IC_EXTRN_MDL_FILENAME_PATTERN="rrfs.@Y@m@d/@H/rrfs.t@Hz.natlev.3km.ffHHH.na.grib2"
+export IC_EXTRN_MDL_FILENAME_PATTERN="rrfs.@Y@m@d/@H/rrfs.t@Hz.natlev.3km.f^HHH^.na.grib2"
 export LBC_EXTRN_MDL_NAME=${IC_EXTRN_MDL_NAME}
 export LBC_EXTRN_MDL_FILENAME_PATTERN=${IC_EXTRN_MDL_FILENAME_PATTERN}
 export IC_EXTRN_MDL_BASEDIR="/scratch4/BMC/rtrr/RRFS2_RETRO_DATA/Nov2025/RRFS"
