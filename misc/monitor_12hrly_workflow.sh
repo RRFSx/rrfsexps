@@ -10,6 +10,7 @@ PDY=${curtime:0:8}
 cyc=${curtime:8:2}
 
 cyc=$(( (10#${cyc} / 12) * 12 ))
+cyc=$(printf "%02d" ${cyc})
 prevCyc=$(date -u -d "${PDY} ${cyc} UTC -24 hours" +%Y%m%d%H)
 cycles=${prevCyc}00:${PDY}${cyc}00
 
