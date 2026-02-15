@@ -21,9 +21,11 @@ if [[ -s .msg.save  && -s .msg.new ]]; then
   # only send alerts if the new msg is different from the saved one to avoid duplicate alerts
   if ! diff .msg.save .msg.new &>/dev/null && [[ ${msg} == *DEAD* ]]; then
     send_email=true
+    subject="${subject}: dead job(s)"
   fi
 elif [[ ${msg} == *DEAD* ]]; then
   send_email=true
+  subject="${subject}: dead job(s)"
 fi
 mv .msg.new .msg.save
 

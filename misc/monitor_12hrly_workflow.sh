@@ -20,9 +20,11 @@ echo "${msg}" > .msg.new
 if [[ -s .msg.save  && -s .msg.new ]]; then
   if ! diff .msg.save .msg.new &>/dev/null && [[ ${msg} == *DEAD* ]]; then
     send_email=true
+    subject="${subject}: dead job(s)"
   fi
 elif [[ ${msg} == *DEAD* ]]; then
   send_email=true
+  subject="${subject}: dead job(s)"
 fi
 mv .msg.new .msg.save
 
