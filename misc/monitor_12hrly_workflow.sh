@@ -48,7 +48,7 @@ else
 fi
 
 ## check whether any running fcst jobs hang without any further outputs
-rrun #&>/dev/null # update the rocoto db files first before rtasks
+rrun &>/dev/null # update the rocoto db files first before rtasks
 running=$(rtasks fcst 48 | grep "RUNNING" | awk '{print $1","$3}')
 mapfile -t lines  <<< "${running}"
 for line in ${lines[@]}; do
@@ -64,10 +64,10 @@ for line in ${lines[@]}; do
     # cancel the hung fcst task and reboot it
     send_email=true
     subject="${subject}: ${line:6:4}_hang"
-    scancel ${jobid} #&>/dev/null
+    scancel ${jobid} &>/dev/null
     sleep 15s
-    rrun ${cdate} fcst #&>/dev/null
-    rboot ${cdate} fcst #&>/dev/null
+    rrun ${cdate} fcst &>/dev/null
+    rboot ${cdate} fcst &>/dev/null
   fi
 done
 
