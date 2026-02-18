@@ -12,11 +12,12 @@ cyc=${curtime:8:2}
 prevCyc=$(date -u -d "${PDY} ${cyc} UTC -3 hours" +%Y%m%d%H) # check the recent 3 cycles
 cycles=${prevCyc}00:${PDY}${cyc}00
 
+## check whether we have dead jobs in the past 24 hours
 send_email=false
 msg=$(rocotostat -w rrfs.xml -d rrfs.db -c ${cycles})
-echo "${msg}" > .msg.new
+echo "${msg}" | grep " DEAD "  > .msg.new
 
-# need to send out alerts when we get DEAD jobs
+# need to send out alerts when we get new DEAD jobs
 if [[ -s .msg.save  && -s .msg.new ]]; then
   # only send alerts if the new msg is different from the saved one to avoid duplicate alerts
   if ! diff .msg.save .msg.new &>/dev/null && [[ ${msg} == *DEAD* ]]; then
@@ -43,6 +44,8 @@ if [[ ${msg} != *RUNNING* ]]; then
   else
     date +%s > .stall
   fi
+else
+  rm -rf .stall
 fi
 
 if ${send_email}; then
