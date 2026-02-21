@@ -7,9 +7,10 @@ CMD=./gaea_bkg_rrun_and_monitor.sh
 
 ssh -T -o BatchMode=yes ${NODE} << EOF
 # Check if the screen session exists
-if screen -list | grep -q "\\.${SCREEN_NAME}[[:space:]]"; then
+if screen -list | grep -q "\\.${SCREEN_NAME}.*(Detached)"; then
     exit 0
 else
+    screen -wipe &> /dev/null
     screen -dmS ${SCREEN_NAME} bash -c "
         cd ${WORKDIR} || exit 1
         ${CMD}
