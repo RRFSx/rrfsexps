@@ -11,6 +11,7 @@ while true; do
   rrun
   knt=$(( knt+1 ))
   if (( knt == 5 )); then # check dead jobs or stalled workflow every 5 minutes
+    ./rt_status.sh
     knt=0
 
     curtime=$(date -u +%Y%m%d%H)
