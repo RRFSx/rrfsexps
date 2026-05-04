@@ -14,34 +14,13 @@ export DATAROOT=${OPSROOT}/stmp    # task workdirs ($DATA) which to be removed i
 #
 export ZETA_LEVELS="L60.txt"
 #
-export DO_IODA=false
-export DO_JEDI=false
-#export SNUDGETYPES="GGG" # G=gsd_update_soiltq from GSI; P=2022 J Hydro paper; chars=SoilT,SnowT,SoilQ
-export DO_NONVAR_CLOUD_ANA=false
-export COLDSTART_CYCS_DO_DA=false
-export DO_CHEMISTRY=false
 export DO_CLEAN=false
-export HYB_WGT_ENS=0.0
-export HYB_WGT_STATIC=1.0
-export HYB_ENS_TYPE=2      # 1.rrfs; 2.interpolated GEFS/GDAS; 0.TBD on the fly (rrfs->GDAS->3DVAR)
-export HYB_ENS_PATH="/gpfs/f6/bil-fire10-oar/world-shared/gge/OPSROOT/bec.gefs.2024050600-2024051223"     # if empty, the workflow will try to find ensembles automatically
-export DO_RADAR_REF=false  # does not work for 3DVar, only EnVar or GETKF
-export RADARREFL_TIMELEVEL="00"  # 00 15 30 45 min
-export ENS_SIZE=30
-export ENS_BEC_LOOK_BACK_HRS=1  # define the hours going back for ensemble forecast files for the ensemble BEC
-
-export STATIC_BEC_MODEL="GSIBEC" # the static bec model, GSIBEC and BUMPBEC
-export GSIBEC_X=8 #GSIBEC_X * GSIBEC_Y should match the number of MPI tasks
-export GSIBEC_Y=10
-
-export DO_CYC=false
-export CYC_INTERVAL=1
 for i in {0..23};    do arr[$i]="01"; done # 3hr fcst
 for i in {0..23..12}; do arr[$i]="02"; done # 12hr fcst every 12hrs
 export FCST_LEN_HRS_CYCLES="${arr[*]}"
 export HISTORY_INTERVAL=1
-export MPASSIT_GROUP_TOTAL_NUM=1
-export UPP_GROUP_TOTAL_NUM=1
+export MPASOUT_INTERVAL=none
+export POST_GROUP_TOT_NUM=1 # num of groups, the final group absorbs leftovers, the first group contains the extra f000h file
 
 export IC_OFFSET=0
 export LBC_OFFSET=0
@@ -71,12 +50,11 @@ export NODES_JEDIVAR="<nodes>4:ppn=20</nodes>"
 export NODES_IODA_MRMS_REFL="<nodes>1:ppn=40</nodes>"
 #
 export WALLTIME_FCST="1:30:00"
-export WALLTIME_SAVE_FCST="1:30:00"
 export WALLTIME_MPASSIT="1:00:00"
 export WALLTIME_UPP="1:00:00"
 export WALLTIME_JEDIVAR="00:30:00"
 #
-export KEEPDATA=NO
+export KEEPDATA=YES
 #
 # local.setup: setup some local options specific to a platform or an experiment
 #
