@@ -8,7 +8,7 @@ Collection of exp and configuration files from ar-worklfow, rrfs-workflow, rtma-
 or by groups, such as `dev1/`, `dev2/`, `chemistry/`, `coldstart_only` etc
 
 3. If there is an `config_chemistry` file, commit it as well.    
-Here is an example: https://github.com/AR-PS/exp-depot/tree/main/chemistry/smoke_dust_conus12km
+Here is an example: https://github.com/AR-PS/exp_depot/tree/main/chemistry/smoke_dust_conus12km
 
 4. If there is an `config_resources/config_override` file, commit it as well
 
