@@ -15,12 +15,13 @@ export DATAROOT=${OPSROOT}/stmp    # task workdirs ($DATA) which to be removed i
 #
 export ZETA_LEVELS="L60.txt"
 #
-for i in {0..23};    do arr[$i]="03"; done
+for i in {0..23};    do arr[$i]="120"; done  # need to set as 120hr as well so that smart_post_groups.py works correctly
 for i in {0..23..12}; do arr[$i]="120"; done # 120hr fcst at 00, 12z
 export FCST_LEN_HRS_CYCLES="${arr[*]}"
 export HISTORY_INTERVAL=6
+export DIAG_INTERVAL=6
 export MPASOUT_INTERVAL=none
-export POST_GROUP_TOTAL_NUM=8
+export POST_GROUP_TOT_NUM=5
 #
 export IC_OFFSET=6
 export LBC_OFFSET=6
@@ -33,11 +34,11 @@ export RETRO_PERIOD="2025121600-2025122600"
 export LBC_CYCS="00 12"  # evenly divide 24 hours, e.g., "00 12", "00 06 12 18", etc
 export COLDSTART_CYCS="00 12"   # cycles to cold start from external models
 export DO_ARCHIVE=true
-export ARCHIVE_INTERVAL=12 # run the archive task every several hours
+export ARCHIVE_INTERVAL=1 # run the archive task every several hours
 export ARCHIVE_HPSSDIR="/5year/BMC/wrfruc/Guoqing.Ge/${EXP_NAME}"
 export ARCHIVE_COM1_SPEC='{"include":"ioda*, jedivar, nonvar*, fcst, upp, pyDAmonitor, graphics", "exclude":""}'  # use " inside and ' outside
 export ARCHIVE_STMP='fcst,mpassit'  # eg. 'fcst,mpassit'  # archive files under the given task umbrella directories
-export ARCHIVE_STMP_INTERVAL='12'  # ARCHIVE_STMP_INTERVAL must divide ARCHIVE_INTERVAL evenly
+export ARCHIVE_STMP_INTERVAL='1'  # ARCHIVE_STMP_INTERVAL must divide ARCHIVE_INTERVAL evenly
 export KEEPDATA=YES
 #
 export IC_EXTRN_MDL_NAME="GFS"
@@ -46,7 +47,7 @@ export IC_EXTRN_MDL_FILENAME_PATTERN_B="gfs.@Y@m@d/@H/gfs.t@Hz.pgrb2b.0p25.f^HHH
 export LBC_EXTRN_MDL_NAME=${IC_EXTRN_MDL_NAME}
 export LBC_EXTRN_MDL_FILENAME_PATTERN=${IC_EXTRN_MDL_FILENAME_PATTERN}
 export LBC_EXTRN_MDL_FILENAME_PATTERN_B=${IC_EXTRN_MDL_FILENAME_PATTERN_B}
-export IC_EXTRN_MDL_BASEDIR="/gpfs/f6/bil-fire10-oar/world-shared/RRFS2_RETRO_DATA/Dec2025/GFSv16_update_snow"
+export IC_EXTRN_MDL_BASEDIR="/gpfs/f6/bil-fire10-oar/world-shared/RRFS2_RETRO_DATA/Dec2025/GFSv16mod"
 export LBC_EXTRN_MDL_BASEDIR=${IC_EXTRN_MDL_BASEDIR}
 #
 export ACCOUNT="arfs-gsl"
