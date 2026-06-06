@@ -22,6 +22,7 @@ export DO_NONVAR_CLOUD_ANA=false
 export COLDSTART_CYCS_DO_DA=false
 export DO_CHEMISTRY=false
 export DO_CLEAN=true
+export STMP_RETENTION_CYCS=5
 export HYB_WGT_ENS=0.0
 export HYB_WGT_STATIC=1.0
 export HYB_ENS_TYPE=2      # 1.rrfs; 2.interpolated GEFS/GDAS; 0.TBD on the fly (rrfs->GDAS->3DVAR)
@@ -51,7 +52,7 @@ export LBC_OFFSET=6
 export LBC_LENGTH=18
 export LBC_INTERVAL=1
 export LBC_UNGRIB_GROUP_TOTAL_NUM=1
-export LBC_GROUP_TOTAL_NUM=1
+export LBC_GROUP_TOTAL_NUM=5
 
 export RETRO_PERIOD="2024050600-2024050700"
 export LBC_CYCS="00 12"  # evenly divide 24 hours, e.g., "00 12", "00 06 12 18", etc
